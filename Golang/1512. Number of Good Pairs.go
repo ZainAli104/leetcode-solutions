@@ -4,14 +4,13 @@ import "fmt"
 
 func numIdenticalPairs(nums []int) int {
 	count := 0
-	numsLength := len(nums)
+	freq := make(map[int]int)
 
-	for i := 0; i < numsLength; i++ {
-		for j := 0; j < numsLength; j++ {
-			if nums[i] == nums[j] && i < j {
-				count++
-			}
-		}
+	for _, num := range nums {
+		// If the number has appeared before, it can form pairs with all previous occurrences
+		count += freq[num]
+		// Increment the frequency of the current number
+		freq[num]++
 	}
 
 	return count
